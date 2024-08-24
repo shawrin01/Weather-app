@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/7e04e8e2db.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="card">
+    <!-- <div class="tir"></div> -->
+    <div class="search">
+    <input type="text" name="" id="input" placeholder="type city name">
+    <button>
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+  </div>
+    <div class="weather">
+      <img src="https://cdn-icons-png.freepik.com/256/4431/4431425.png?uid=R119732703&ga=GA1.1.242276672.1694532229&semt=ais_hybrid" alt="">
+      <h1 id="temp" style="padding-bottom: 10px;"></h1>
+   <h2 id="city" >Chittagong</h2>
+   <h3 id="dat">city time</h3>
+    </div>
+    <div class="nature">
+      <div class="hum">
+        <i class="fa-solid fa-wind"></i>
+        <h2 id="wind">5.56km/h</h2>
+        <p>wind speed</p>
+      </div>
+      <div class="hum">
+        <i class="fa-solid fa-smog"></i>        
+        <h2 id="hum">53%</h2>
+        <p>Humidity</p>
+      </div>
+    </div>
+    
+  </div>
+  <script>
+  //   const dat = document.getElementById('dat');
+  //   const input = document.getElementById('input');
+  //  var button = document.querySelector('button');
+  //   const wind = document.getElementById('wind');
+  //   const hum = document.getElementById('hum');
+  //   const temp = document.getElementById('temp');
+  //   const city = document.getElementById('city');
+   
+  //  async function getData(cityName){
+  //     var promise = await fetch(
+  //       `http://api.weatherapi.com/v1/current.json?key=00ca3c77e80a47fe961140505242308&q=${cityName}&aqi=no"`
+
+  //     );
+  //          return await promise.json();
+  //   }
+  //   button.addEventListener("click",async function () {
+  //        const val = input.value;
+  //        var result = await getData(val);
+  //        temp.innerText = result.current.temp_c +"deg C";
+  //        city.innerText = result.location.name;
+  //        wind.innerText = `${result.current.wind_kph}` +"km/h";
+  //        hum.innerText = result.current.humidity +"%";
+  //        dat.innerText = result.location.localtime;
+  //   });
+  //   const card = document.querySelector("card");
+  //   const tir = document.querySelector('tir');
+  //   card.addEventListener("mousemove",function(dets){
+  //        tir.style.top = dets.y+"px";
+  //        tir.style.left = dets.x+"px";
+       
+  //   })
+
+  async function getData(cityName) {
+       const promise = await fetch(
+        `http://api.weatherapi.com/v1/current.json?key=00ca3c77e80a47fe961140505242308&q=${cityName}&aqi=no"`
+
+       )
+       return await promise.json();
+  }
+  var button = document.querySelector('button');
+  const input = document.querySelector('#input');
+  const city = document.querySelector('#city');
+  const wind = document.getElementById('wind');
+    const hum = document.getElementById('hum');
+         const dat = document.getElementById('dat');
+         const temp = document.getElementById('temp');
+
+         button.addEventListener("click",async function () {
+            const val = input.value;
+              const result = await getData(val);
+            city.innerText = result.location.name;
+            wind.innerText = `${result.current.wind_kph}` +"km/h";
+            hum.innerText = result.current.humidity +"%";
+            dat.innerText = result.location.localtime;
+            temp.innerText = result.current.temp_c +"deg C";
+         })
+
+
+          
+  </script>
+</body>
+</html>
